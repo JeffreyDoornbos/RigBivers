@@ -6,60 +6,37 @@
   <title>Rig Bivers 2025</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
   <link rel="icon" href="RigBiversLogoBitches.png" type="image/png">
   <link rel="stylesheet" href="styles/style.css">
-  <style>
-    /* Container for the video and text */
-    header {
-      position: relative;
-      width: 100%;
-    }
-
-    /* Style for the text over the video */
-    .overlay-text {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: #FED800;
-      font-size: 4rem;
-      font-family: 'Open Sans', sans-serif;
-      text-align: center;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      font-weight: bold;
-    }
-  </style>
 </head>
 
 <body>
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6a3583;">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center" href="#">
-      <img src="RigBiversLogoBitches.png" alt="Rig Bivers Logo" width="100" height="100" class="me-2">
-      Rig Bivers BEL JE VRIENDEN!!
-    </a>
+<nav class="navbar navbar-expand-lg navbar-dark py-0">
+  <a class="navbar-brand d-flex justify-content-start py-0" href="#">
+    <img src="RigBiversLogoBitches.png" alt="Rig Bivers" width="100" height="100">
+  </a>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <h1 class="m-0 ms-2 text-white text-uppercase">Rig Bivers</h1>
 
-    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Line-up</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Info</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Tickets</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-      </ul>
-    </div>
+  <button class="navbar-toggler justify-content-end me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse justify-content-end mx-4 py-3" id="navbarNav">
+    <ul class="navbar-nav text-end">
+      <li class="nav-item"><a class="nav-link" href="#" id="bel-link">Ik bel mijn vrienden</a></li>
+      <li class="nav-item"><a class="nav-link" href="https://bigrivers.nl">Breng me naar bIG rIVERS</a></li>
+    </ul>
   </div>
 </nav>
 
 <!-- Video Header -->
 <header>
-  <video class="header-video" autoplay muted loop>
+  <video class="bg-black header-video" autoplay muted loop>
     <source src="Orange Brass - Big Rivers 2024.mp4" type="video/mp4">
     Your browser does not support HTML5 video.
   </video>
@@ -67,19 +44,27 @@
   <div class="overlay-text">BEL JE VRIENDEN!!!</div>
 </header>
 
+<!-- Overlay Element -->
+<div id="video-overlay" class="video-overlay justify-content-center align-items-center text-white">
+  <div class="overlay-content text-center">
+    <h2>Jij belt nú je vrienden. Lekker bezig!</h2>
+    <p>We hebben er zin in</p>
+    <button id="close-overlay" class="btn btn-success mt-3">GOED</button>
+  </div>
+</div>
+
 <!-- Countdown Section -->
-<section class="countdown-wrapper py-5 text-center text-white" style="background-color: #6a3583;">
+<section class="countdown-wrapper py-4 py-md-5 text-center text-white">
   <div class="container">
-    <h2 class="mb-4">BEL JE VRIENDEN!!!</h2>
-    <h2 class="mb-4">TOT ZIENS BIJ RIG BIVERS OP 11, 12 & 13 JULI 2025!</h2>
+    <h2 class="mb-4">TOT ZIENS BIJ RIG BIVERS<br>OP 11, 12 & 13 JULI 2025!</h2>
     <div class="countdown d-flex justify-content-center gap-3 fs-2 flex-wrap">
-      <div><span id="days">0</span><small> Dag(en)</small></div>
+      <div><span id="days">0</span><small> Dagen</small></div>
       <span>:</span>
-      <div><span id="hours">0</span><small> Uur(s)</small></div>
+      <div><span id="hours">0</span><small> Uren</small></div>
       <span>:</span>
-      <div><span id="minutes">0</span><small> Minuut(s)</small></div>
+      <div><span id="minutes">0</span><small> Minuten</small></div>
       <span>:</span>
-      <div><span id="seconds">0</span><small> Second(s)</small></div>
+      <div><span id="seconds">0</span><small> Seconden</small></div>
     </div>
   </div>
 </section>
@@ -88,10 +73,27 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
   window.onload = function() {
+    
+    // Play the video
     const video = document.querySelector('video');
     video.play().catch((error) => {
       console.log('Autoplay failed:', error);
     });
+
+    // Handle overlay toggle
+    const overlay = document.getElementById('video-overlay');
+    const closeOverlay = document.getElementById('close-overlay');
+    const navLink = document.getElementById('bel-link');
+
+    navLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      overlay.style.display = 'flex';
+    });
+
+    closeOverlay.addEventListener('click', () => {
+      overlay.style.display = 'none';
+    });
+
   }
 </script>
 
